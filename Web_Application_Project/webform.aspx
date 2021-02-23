@@ -9,8 +9,6 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:DropDownList ID="DropDownList1" runat="server"></asp:DropDownList>
-            <%--<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>--%>
                 <asp:ListView ID="ListView1" runat="server">
                     <ItemTemplate>
                         <div class="col">
