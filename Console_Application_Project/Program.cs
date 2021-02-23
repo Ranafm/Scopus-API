@@ -13,8 +13,8 @@ namespace API_framework
          static List<entry> journals = new List<entry>();
         static void Main(string[] args)
         {
-            //Console.WriteLine("main function");
-            RunAsync().Wait();
+           Console.WriteLine("main function");
+         //   RunAsync().Wait();
             // List<entry> x = Liststring();
             //Console.WriteLine(x + "here the main");
 
@@ -33,7 +33,7 @@ namespace API_framework
                //Read the documentation to add query params
                 HttpResponseMessage response = await client.GetAsync("https://api.elsevier.com/content/serial/title?apikey="hereAPIkey"&httpAccept=application/json");
                
-                //TODO: convert into json
+                //TODO: into json
                 JObject journal = JObject.Parse(await response.Content.ReadAsStringAsync());
 
                 //Loop over the objects
@@ -44,26 +44,28 @@ namespace API_framework
                     string title = (string)journal["serial-metadata-response"]["entry"][i]["dc:title"];
                     string subject = (string)journal["serial-metadata-response"]["entry"][i]["subject-area"][0]["@abbrev"];
                     string link = (string)journal["serial-metadata-response"]["entry"][i]["link"][0]["@href"];
+                    //Add the data into a list 
                     journals.Add(new entry { name = title, subject = subject, link = link });
                 }
 
 
-                //TODO: for check write the journals
+                //TODO: write the data in the journals list
+                //To check ..
                 foreach (entry journal in journals)
                 {
 
                     Console.WriteLine($"Title: {journal.name}\n The subject area : {journal.subject}\n Journal Link:{journal.link} \n\n ---- \n");
                 }
-                //Console.WriteLine(rr. + "here the  response");
+
             }
         }
-//Return List of data 
+//Return List of object type entry 
    public static List<entry> Liststring()
         {
             RunAsync().Wait();
             List<entry> titles = new List<entry>();
             Console.WriteLine("-- here return function ---");
-            Console.WriteLine(journals);
+            //Console.WriteLine(journals);
             foreach (entry journal in journals)
             {
                 titles.Add(new entry { name = journal.name, subject = journal.subject, link = journal.link });
